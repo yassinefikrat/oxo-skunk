@@ -1,0 +1,5 @@
+{
+  "env": {
+    "MONGODB_URI": "@oxo-01-mongodb"
+  }
+}

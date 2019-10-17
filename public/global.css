@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,900&display=swap');
+
+* {
+	margin: 0;
+}
+
+main {
+	height: 100vh;
+	background-image:linear-gradient(#ffafbd, #ffc3a0);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	font-family: 'Lato black', sans-serif;
+}
