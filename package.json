@@ -10,6 +10,7 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
+    "svelte-routing": "^1.4.0",
     "mongodb": "^3.3.2",
     "sirv-cli": "^0.4.4"
   },
