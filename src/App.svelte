@@ -22,9 +22,16 @@
     let oPlaying = true
     let hoveringCell = null
 
-    let source = new EventSource('http://10.2.22.47:5001/listen/blsjk')
+    let game = 'default'
+    let source
 
-    source.addEventListener('message', messageEvent => {
+    const joinGame = () => {
+    	if (source) source.removeEventListener('message', moveListener)
+    	source = new EventSource('http://10.2.22.47:5001/listen/' + game)
+    	source.addEventListener('message', moveListener)
+    }
+
+    const moveListener = messageEvent => {
     	const message = JSON.parse(messageEvent.data)
 
     	if (message.action === 'restart') {
@@ -72,7 +79,7 @@
 			}
     	}
     	
-    })
+    }
 
     const post = async (url, body) => {
     	await (await fetch(url, { method: 'POST', body: body })).json()
@@ -80,7 +87,7 @@
 
     function click(index) {
     	post(
-    		'http://10.2.22.47:5001/write/blsjk',
+    		'http://10.2.22.47:5001/write/' + game,
     		JSON.stringify({
     			action: 'move',
     			player: oPlaying ? 'o' : 'x',
@@ -96,7 +103,7 @@
 
     const restart = () => {
     	post(
-    		'http://10.2.22.47:5001/write/blsjk',
+    		'http://10.2.22.47:5001/write/' + game,
     		JSON.stringify({ action: 'restart' })
 		)
     }
@@ -104,6 +111,8 @@
     const changePlayer = symbol => {
     	oPlaying = (symbol === 'o')
     }
+
+    joinGame()
 
 
 </script>
